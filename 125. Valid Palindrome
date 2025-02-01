@@ -1,0 +1,16 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        arr = []
+        s = s.lower()
+        
+        for i in s:
+            if i >= 'a' and i <= 'z':
+                arr.append(i)
+            if i >= '0' and i <= '9':
+                arr.append(i)
+        
+        if arr == arr[::-1]:
+            return True
+        else:
+            return False
+        
