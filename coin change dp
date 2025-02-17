@@ -1,0 +1,18 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        # Initialize dp array with amount + 1 (larger than possible maximum)
+        dp = [amount + 1] * (amount + 1)
+        # Base case: 0 amount needs 0 coins
+        dp[0] = 0
+        
+        # For each amount from 1 to target
+        for curr_amount in range(1, amount + 1):
+            # Try each coin denomination
+            for coin in coins:
+                # If the coin value is less than or equal to current amount
+                if coin <= curr_amount:
+                    # Take minimum of current solution and solution after using this coin
+                    dp[curr_amount] = min(dp[curr_amount], dp[curr_amount - coin] + 1)
+        
+        # Return -1 if no solution found, otherwise return the solution
+        return dp[amount] if dp[amount] != amount + 1 else -1
