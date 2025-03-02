@@ -1,0 +1,24 @@
+from collections import defaultdict
+
+class Solution:
+    def minScore(self, n: int, roads: List[List[int]]) -> int:
+        adj = defaultdict(list)
+
+        for src,dst,dis in roads:
+            adj[src].append((dst,dis))
+            adj[dst].append((src,dis))
+
+        def dfs(i):
+            if i in visited:
+                return
+            visited.add(i)
+            nonlocal res
+            for nei, dis in adj[i]:
+                res = min(res,dis)
+                dfs(nei)
+        
+        
+        res = float("inf")
+        visited = set()
+        dfs(1)
+        return res
